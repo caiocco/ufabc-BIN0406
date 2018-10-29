@@ -1,5 +1,4 @@
 \documentclass{article}
-\bibliographystyle{abntex2-num}
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{lineno}
@@ -17,6 +16,7 @@
 \usepackage{nameref}
 \usepackage{indentfirst}
 \usepackage{array}
+\usepackage[alf]{abntex2cite}
 
 \setlength{\parskip}{\baselineskip}%
 %\setlength{\parindent}{0pt}%
@@ -25,6 +25,7 @@
 
 \newcommand{\aula}[2][]{\todo[inline,color=blue!10, #1]{\textbf{#2}}}
 \newcommand{\nota}[2][]{\todo[color=yellow!30,linecolor=black, #1]{#2}}
+\newcommand{\revisar}[2][]{\todo[color=red!30,linecolor=black, #1]{#2}}
 \newcommand{\notagrande}[2][]{\todo[inline,color=orange!30, #1]{#2}}
 
 \fancypagestyle{plain}{
@@ -68,6 +69,8 @@
 	As anotações e considerações que se seguem foram realizadas de maneira autônoma e não são fruto de orientação por parte da universidade e/ou de qualquer membro do corpo docente. Foram realizadas para fins de estudo, sendo, portanto, reflexo de um esforço de cunho pessoal para melhor apreensão do conteúdo discutido em sala.
 	
 	\nocite{ross2010}
+	\nocite{morin2016}
+	\nocite{lipson2011}
 	
 	\section{Análise combinatória}
 	
@@ -260,7 +263,7 @@
 	
 	\noindent (a) Considerando a ordem
 	
-	Resposta: Pelo \nota{Princípio Básico da Contagem}PBC:
+	Resposta: Pelo \nota{Princípio Básico da Contagem}PBC: \label{PBC}
 	
 	$n \cdot (n-1) \cdot (n-2) \cdot \dots \cdot (n - m + 1) = \dfrac{n!}{n-m!}$ \nota{Lê-se: ``arranjo de $n$, $n$ a $m$'', extraindo $m$ de $n$ sem reposição}$= An,m$
 	
@@ -628,7 +631,7 @@
 	
 	$ E = \{c\} \subset \{c,k\} $
 	
-	\nota{Preciso revisar isso aqui!}$ E = \subset \in \{c,k\} $
+	\revisar{Preciso revisar isso aqui!}$ E = \subset \in \{c,k\} $
 	
 	\subsubsection{Exemplo 10} \label{sssec:ex10}
 	
@@ -687,8 +690,6 @@
 	
 	$ A = \{1,2\}, B = \{1,3\}, C = \{1,4\}, D = \{1,5\} $
 	
-	falta colocar
-	
 	\subsection{Proposição 7}
 	
 	\textbf{Desigualdades de Bonferroni.} Primeira desigualdade de Bonferroni: sub-aditividade.
@@ -715,6 +716,86 @@
 	
 	\noindent Jogam-se dois dados (honestos). Qual a probabilidade de a soma das faces observadas ser $8$?
 	
+	Resposta:
+	
+	$ \varOmega = \{1,2,3,4,5,6\}^{2}, |\varOmega|=36 $
+	
+	$ \varepsilon = \mathcal{P}(\varOmega); |\varepsilon|=2^{36} $
+	
+	$ E  \{ (i,j) i + j = 8\} = \{(2,6), (3,5), (4,4), (5,3), (6,2) \}; |E|=5 $
+	
+	$ \mathcal{P}(E) = \frac{|E|}{|\varOmega|} = \frac{5}{36} \approx 14\% $
+	
+	\subsubsection{Exemplo 21}
+	
+	\noindent \nota{Pode ser oportuno ler \citeonline[p.85--86]{morin2016}}Problema dos aniversários. Em uma sala há $23$ pessoas. Qual a probabilidade de que ninguém aniversarie no mesmo dia?
+	
+	Resposta:
+	
+	$ |\varOmega| = 365^{23} $
+	
+	$ |E| = 365 \cdot 364 \cdot 363 \cdot \dots \cdot 343 = A365,23 $
+	
+	$ \mathcal{P}(E) = \frac{A365,23}{365^{23}} = \dfrac{\frac{365!}{342!}}{365^{23}} = 49,27\% $
+	
+	\notagrande{A prova 1 versa sobre os capítulos e listas 1 e 2. Data prevista: 05/11/2018}
+	
+	\aula{Início da aula de 24/10/2018}
+	
+	Voltaremos ao \nameref{sssec:ex19}. A ideia foi explicar que não há implicações negativas ao ``etiquetar'' as bolinhas. Professor comenta também brevemente sobre o Teorema da Probabilidade Total. Devemos estudá-lo dentro de uma ou duas aulas.
+	
+	\subsubsection{Exemplo 19} \label{sssec:ex19}
+	
+	\noindent Com reposição.
+	
+	$ \underbracket{\overbrace{\circ \bullet \bullet}}^\text{$ E_{bpp} $}_{\dfrac{6}{11} \cdot \dfrac{5}{11} \cdot \dfrac{5}{11}+} \underbracket{\overbrace{\bullet \circ \bullet}}^\text{$ E_{pbp} $}_{\dfrac{5}{11} \cdot \dfrac{6}{11} \cdot \dfrac{5}{11}+} \underbracket{\overbrace{\bullet \bullet \circ}}^\text{$ E_{ppb} $}_{\dfrac{5}{11} \cdot \dfrac{5}{11} \cdot \dfrac{6}{11}} $
+	
+	$ = \dfrac{450}{113} \approx 33,81\% $
+	
+	$ E = E_{bpp} \cup E_{pbp} \cup E_{ppb} \rightarrow \mathcal{P}(E) = \mathcal{P}(E_{bpp}) + \mathcal{P}(E_{pbp}) + \mathcal{P}(E_{ppb}) = 3 \cdot \dfrac{150}{113} = \dfrac{450}{113} $
+	
+	$ |E_{bpp}| = 6 \cdot 5 \cdot 5; |E_{pbp}| = 5 \cdot 6 \cdot 5; |E_{ppb}| = 5 \cdot 5 \cdot 6 = 5 \cdot 5 \cdot 6 $ 
+	
+	$ \mathcal{P}(E) = \frac{|E|}{|\varOmega|} $
+	
+	$ |\varOmega| = 11^{3} $
+	
+	\subsubsection{Exemplo 20}
+	
+	\noindent Urna: 20 brancas + 20 pretas. As bolas são extraídas sequencialmente e acondicionadas em 20 caixas com 2 bolas em cada caixa.
+	
+	\noindent (a) Qual a probabilidade d eque todas as caixas tenham bolas da mesma cor?
+	
+	Resposta:
+	
+	$ |\varOmega| = \dfrac{40!}{(2!)^{20}} $
+	
+	$E =$ todas as caixas com a mesma cor, \textit{i.e.} $10$ caixas brancas + $10$ caixas pretas.
+	
+	$ \dfrac{20!}{10! 10!} \text{embaralhamentos possíveis} \hspace{2cm} \begin{pmatrix}
+	20  \\
+	10
+	\end{pmatrix} $
+	
+	$ \mathcal{P}(E) = \dfrac{|E|}{|\varOmega|} = \dfrac{20!}{10!^{2}} \cdot \dfrac{20!}{2!^{10}} \cdot \dfrac{20!}{2!^{10}} = \dfrac{40!}{2!^{30}} $
+	
+	$ = \dfrac{20!^{3}}{40!(10!)^{2}} = \text{aproximadamente $1$ chance em $746.100$} $
+	
+	Preenchimento das caixas brancas/pretas: $ \begin{pmatrix}
+	20  \\
+	2
+	\end{pmatrix} \cdot \begin{pmatrix}
+	28  \\
+	2
+	\end{pmatrix} \cdot \dots \cdot \begin{pmatrix}
+	2  \\
+	2
+	\end{pmatrix} = \dfrac{20!}{(2!)^{10}} = \dfrac{20!}{(2!)^{10}} $
+	
+	Pelo PBC (vide \autopageref{PBC}): $ |E| = \begin{pmatrix}
+	20  \\
+	10
+	\end{pmatrix} \cdot \dfrac{20!}{2!^{10}} \cdot \dfrac{20!}{2!^{10}} $
 	
 	% ----------------------------------------------------------
 	
