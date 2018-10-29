@@ -1,0 +1,727 @@
+\documentclass{article}
+\bibliographystyle{abntex2-num}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{lineno}
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[autostyle]{csquotes}
+\usepackage[colorinlistoftodos,portuguese,linecolor=black]{todonotes}
+\usepackage{hyperref}
+\usepackage[default,scale=0.95]{opensans}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{nameref}
+\usepackage{indentfirst}
+\usepackage{array}
+
+\setlength{\parskip}{\baselineskip}%
+%\setlength{\parindent}{0pt}%
+
+\usetikzlibrary{arrows,chains,fit,quotes,positioning,shapes}
+
+\newcommand{\aula}[2][]{\todo[inline,color=blue!10, #1]{\textbf{#2}}}
+\newcommand{\nota}[2][]{\todo[color=yellow!30,linecolor=black, #1]{#2}}
+\newcommand{\notagrande}[2][]{\todo[inline,color=orange!30, #1]{#2}}
+
+\fancypagestyle{plain}{
+	\fancyhf{} %Clear Everything.
+	\fancyfoot[C]{\thepage} %Page Number
+	\renewcommand{\headrule}{\hrule height 2pt \vspace{1mm}\hrule height 1pt}
+	\renewcommand{\footrulewidth}{1pt}
+	\fancyfoot[L]{BOTTOM LEFT}
+	\fancyfoot[R]{BOTTOM RIGHT}
+	\fancyhead[LE]{TOP LEFT, EVEN PAGES}
+	\fancyhead[RO]{TOP RIGHT, ODD PAGES}
+}
+\fancyfoot[C]{\sffamily\textbf{\thepage}}
+
+\renewcommand\seriesdefault{l}
+\renewcommand\mddefault{l}
+\renewcommand\bfdefault{sb}
+
+\hypersetup{
+	colorlinks  = true,
+	allcolors   = black,
+	pdftitle    = {Resumo},
+	pdfsubject  = {Estatística},
+	pdfauthor   = {Caio César Carvalho Ortega},
+	pdfcreator  = {Caio César Carvalho Ortega},
+	pdfproducer = {Caio César Carvalho Ortega},
+	pdfkeywords = {estatística, probabilidade, contagem}
+}
+
+\definecolor{Red}{rgb}{0.9,0.0,0.1}
+%\definecolor{Blue}{rgb}{0.1,0.1,0.9}
+\hyphenation{}
+\pagestyle{fancy}
+
+% ----------------------------------------------------------
+
+\begin{document}
+	
+	\section{Prólogo}
+	
+	As anotações e considerações que se seguem foram realizadas de maneira autônoma e não são fruto de orientação por parte da universidade e/ou de qualquer membro do corpo docente. Foram realizadas para fins de estudo, sendo, portanto, reflexo de um esforço de cunho pessoal para melhor apreensão do conteúdo discutido em sala.
+	
+	\nocite{ross2010}
+	
+	\section{Análise combinatória}
+	
+	\aula{Início da aula de 24/09/2018}
+	
+	\subsubsection{Exemplo 3}
+	
+	\noindent Sem admitir repetições, quantas placas são possíveis no Exemplo 1?
+	
+	\begin{figure}[h]
+		\caption{Placas}
+		\label{fig:placas}
+		\centering
+		\begin{tikzpicture}
+			\draw (0,2) rectangle (1,1) node[pos=.5] {$26$}; %node[anchor=north, pos=.5]{0};
+			\draw (1,2) rectangle (2,1) node[pos=.5] {$25$};
+			\draw (2,2) rectangle (3,1) node[pos=.5] {$24$};
+			\draw (3,0) rectangle (4,1) node[pos=.5] {$10$};
+			\draw (4,0) rectangle (5,1) node[pos=.5] {$9$};
+			\draw (5,0) rectangle (6,1) node[pos=.5] {$8$};
+			\draw (6,0) rectangle (7,1) node[pos=.5] {$7$};
+		\end{tikzpicture}
+	\end{figure}
+	
+	$= 78.624.000$
+	
+	\subsection{Permutações (embaralhamento, \textit{``shuffling''})}
+	
+	Quantas funções bijetoras há de $\{1,2,3,\dots,n\}$ em $\{1,2,3,\dots,n\}$?
+	
+	Ver \autoref{fig:bijetoras}.
+	
+	\begin{figure}[h!]
+		\caption{Conjuntos}
+		\label{fig:bijetoras}
+		\centering
+		\begin{tikzpicture}[line width=1pt,>=latex]
+			\node (a1) {$1$};
+			\node[below=of a1] (a2) {$2$};
+			\node[below=of a2] (a3) {$3$};
+			\node[below=of a3] (a4) {$\dots$};
+			\node[below=of a4] (a5) {$n$};
+			
+			\node[right=4cm of a1] (aux1) {};
+			\node[below=-0.4cm of aux1] (b1) {$1$};
+			\node[below=of b1] (b2) {$2$};
+			\node[below=of b2] (b3) {$3$};
+			\node[below=of b3] (b4) {$\dots$};
+			\node[below=of b4] (b5) {$n$};
+			\node[right=4cm of a4] (aux2) {};
+			
+			\node[shape=ellipse,draw=blue,minimum size=2cm,fit={(a1) (a5)}] {};
+			\node[shape=ellipse,draw=blue,minimum size=2cm,fit={(b1) (b5)}] {};
+			
+			\draw[->,blue] (a1) -- (b3.170);
+			\draw[->,blue] (a2) -- (b1.190);
+			\draw[->,blue] (a3) -- (b5.175);
+			\draw[->,blue] (a5.20) -- (b2.190);
+		\end{tikzpicture}
+		
+		\begin{equation*}
+			\boxed{n^{m}}
+		\end{equation*}
+	\end{figure}
+		
+	$n \cdot (n-1) \cdot (n-2) \cdot (n-3) \dots 3 \cdot 2 \cdot 1$
+	
+	Resposta:
+	
+	Se $n = 4$, então:
+	
+	$4^{4} = 256$ funções
+	
+	$4 \cdot 3 \cdot 2 \cdot 1 = 24$ funções bijetoras
+	
+	\subsubsection{Definição 1}
+	
+	\noindent Para cada número $n \in \mathbb{N}$, o número $n! = n \cdot (n-1) \cdot (n-2) \cdot \dots \cdot 3 \cdot 2 \cdot 1$ \nota{Obs.: $0! \doteq 1$}denomina-se ``n fatorial''.
+	
+	\subsubsection{Exemplo 4}
+	
+	\noindent Em uma turma com 6 homens e 4 mulheres, aplica-se uma prova e não ocorrem resultados iguais.
+	
+	\noindent (a) Quantas classificações são possíveis?
+	
+	Resposta: $10!$
+	
+	Ver \autoref{fig:prova6h4m}.
+	
+	\begin{figure}[h]
+		\caption{Representação dos alunos e seus resultados}
+		\label{fig:prova6h4m}
+		\centering
+		\begin{tikzpicture}
+		\filldraw
+		(0,0) circle (2pt) node[align=center,   below] {H} --
+		(6,0) circle (2pt) node[align=center, below] {H | M}     -- 
+		(10,0) circle (2pt) node[align=right,  below] {M};
+				
+		\draw (0,0) rectangle (1,1) node[pos=.5] {$4$}; %node[anchor=north, pos=.5]{0};
+		\draw (1,0) rectangle (2,1) node[pos=.5] {$7$};
+		\draw (2,0) rectangle (3,1) node[pos=.5] {$1$};
+		\draw (3,0) rectangle (4,1) node[pos=.5] {$10$};
+		\draw (4,0) rectangle (5,1) node[pos=.5] {$\dots$};
+		\draw (0,2) rectangle (1,1) node[pos=.5] {$1$}; %node[anchor=north, pos=.5]{0};
+		\draw (1,2) rectangle (2,1) node[pos=.5] {$2$};
+		\draw (2,2) rectangle (3,1) node[pos=.5] {$3$};
+		\draw (3,2) rectangle (4,1) node[pos=.5] {$4$};
+		\draw (4,2) rectangle (5,1) node[pos=.5] {$5$};
+		\draw (5,2) rectangle (6,1) node[pos=.5] {$6$};
+		\draw (6,2) rectangle (7,1) node[pos=.5] {$7$};
+		
+		\draw (7,2) rectangle (8,1) node[pos=.5] {$8$};
+		\draw (8,2) rectangle (9,1) node[pos=.5] {$9$};
+		\draw (9,2) rectangle (10,1) node[pos=.5] {$10$};
+		\end{tikzpicture}
+	\end{figure}
+	
+	$10 \cdot 9 \cdot 8 \cdot 7 \cdot 6 \cdot 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1 = 10!$
+	
+	\noindent (b) Quantas classificações são possíveis, se homens e mulheres não concorrem entre si?
+	
+	Resposta: $6!4!$
+	
+	Homens: $E_{1}Ç$: $6! = n_{1}$
+	
+	Mulheres: $E_{2}Ç$: $4!$
+	
+	\subsubsection{Exemplo 5} \label{sssec:ex5}
+	
+	\noindent Em uma estante há 10 livros: 4 de matemática, 3 de química, 2 de história e 1 de português.
+
+	\begin{figure}[h]
+		\caption{Livros na estante}
+		\label{fig:livros}
+		\centering
+		\begin{tikzpicture}
+		\draw (0,0) rectangle (1,1) node[pos=.5] {M}; %node[anchor=north, pos=.5]{0};
+		\draw (1,0) rectangle (2,1) node[pos=.5] {M};
+		\draw (2,0) rectangle (3,1) node[pos=.5] {M};
+		\draw (3,0) rectangle (4,1) node[pos=.5] {M};
+		\draw (4,0) rectangle (5,1) node[pos=.5] {Q};
+		\draw (5,0) rectangle (6,1) node[pos=.5] {Q};
+		\draw (6,0) rectangle (7,1) node[pos=.5] {Q};
+		\draw (7,0) rectangle (8,1) node[pos=.5] {H};
+		\draw (8,0) rectangle (9,1) node[pos=.5] {H};
+		\draw (9,0) rectangle (10,1) node[pos=.5] {P};
+		\end{tikzpicture}
+	\end{figure}
+	
+	\noindent (a) Quantas disposições há?
+	
+	Resposta: $10!=3.628.100$
+	
+	\noindent (b) Quantas disposições há, se os livros do mesmo assunto permanecerem juntos?
+	
+	Desenvolvimento:
+	
+	$E_{M}$: $4!=n_{M}$
+
+	$E_{Q}$: $4!=n_{Q}$
+
+	$E_{H}$: $4!=n_{H}$
+	
+	$E_{P}$: $4!=n_{P}$
+	
+	\nota{``B'' de box}$E_{B}$: $4!=n_{B}$
+	
+	Resposta:
+	
+	$4! \cdot 4! \cdot 3! \cdot 2! \cdot 1! = n_{B} \cdot n_{M} \cdot n_{Q} \cdot n_{H} \cdot n_{P} = 6.912$
+	
+	\subsubsection{Exemplo 6} \label{sssec:ex6}
+	
+	\noindent Quantos anagramas possui a palavra \textbf{arara}?
+	
+	Resposta:
+	
+	$\dfrac{5!}{3! \cdot 2!}=10$
+	
+	\subsection{Permutações com repetições}
+	
+	\notagrande{Com itens indistinguíveis}
+	
+	Se pudermos classificar $n$ objetos em $r$ grupos (categorias) com $n_{1}, n_{2}, \dots, n_{r}$ elementos cada um (subentende-se $r=4$ para o \nameref{sssec:ex5}, pois $4+3+2+1=10$ e $r=2$ no \nameref{sssec:ex6}, pois $2+3=5$), de tal sorte que os elementos de um mesmo grupo são indistinguíveis, então o número de permutações é $\dfrac{n!}{n_{1}! \cdot n_{2}! \cdot n_{3}! \cdot \dots \cdot n_{r}!}$
+	
+	\section{Combinações e arranjos}
+	
+	De quantas maneiras podemos selecionar $m$ dentre $n$ balas numeradas de $1$ a $n$?
+	
+	\noindent (a) Considerando a ordem
+	
+	Resposta: Pelo \nota{Princípio Básico da Contagem}PBC:
+	
+	$n \cdot (n-1) \cdot (n-2) \cdot \dots \cdot (n - m + 1) = \dfrac{n!}{n-m!}$ \nota{Lê-se: ``arranjo de $n$, $n$ a $m$'', extraindo $m$ de $n$ sem reposição}$= An,m$
+	
+	\noindent (b) Sem considerar a ordem
+	
+	Resposta:
+	
+	$\dfrac{\frac{n!}{n-m!}}{m!}=\dfrac{n!}{(n-m)! \cdot m!}  = \begin{pmatrix}
+	1 \\
+	2
+	\end{pmatrix} =$ \nota{Combinação de $n$, $n$ a $m$}$Cn,m$
+	
+	\subsection{Definição 2}
+	
+	O número $\begin{pmatrix}
+	n \\
+	m
+	\end{pmatrix} = \dfrac{n!}{n-m! \cdot m!}$, onde $n, m \in \mathbb{Z}_{+}$ e $m \leq n$, denomina-se ``coeficiente binomial''.
+	
+	\subsubsection{Exemplo 7}
+	
+	\noindent Dentre 5 mulheres e 7 homens, quantas comissões diferentes podem-se formar com duas mulheres e três homens?
+	
+	Resposta:
+	
+	$E_{H}$: $\begin{pmatrix}
+	7 \\
+	3
+	\end{pmatrix} = n_{H}$
+	
+	$E_{M}$: $\begin{pmatrix}
+	5 \\
+	2
+	\end{pmatrix} = n_{M}$
+	
+	$n_{H} \cdot n_{M} = \begin{pmatrix}
+	7 \\
+	3
+	\end{pmatrix} \cdot \begin{pmatrix}
+	5 \\
+	2
+	\end{pmatrix} = 35 \cdot 10 = 350$
+	
+	\noindent E se dois homens se recusarem a trabalhar juntos?
+	
+	Resposta:
+	
+	$n_{H} \cdot n_{M} = \left [ \underbrace{\begin{pmatrix}
+	7 \\
+	3
+	\end{pmatrix}}_\text{$n_{H}$} \cdot \begin{pmatrix}
+	5 \\
+	1
+	\end{pmatrix} \right ] \cdot \underbrace{\begin{pmatrix}
+	5 \\
+	2
+	\end{pmatrix}}_\text{$n_{M}$} = ( 35 - 5 ) \cdot 10 = 300$
+
+	\aula{Início da aula de 26/09/2018}
+	
+	\subsubsection{Exemplo 8}
+	
+	\noindent De quantas maneiras diferentes podemos arranjar linearmente $m = 3$ bolas pretas e $n = 5$ bolas brancas sem que duas bolas pretas pequenas fiquem lado a lado?
+	
+	Desenvolvimento:
+	
+	$ \dfrac{8!}{5! \cdot 3!} = 336 $
+	
+	$ \begin{pmatrix}
+		6 \\
+		3
+	\end{pmatrix} = \dfrac{6!}{3! \cdot 3!} = 20 $
+	
+	Resposta:
+	
+	$  \begin{pmatrix}
+	n+1 \\
+	m
+	\end{pmatrix} $
+	
+	\subsection{Proposição 1}
+	
+	$ \dfrac{n!}{(n-m)! \cdot m!} = \begin{pmatrix}
+	n \\
+	m
+	\end{pmatrix} = \begin{pmatrix}
+	n-1 \\
+	m
+	\end{pmatrix} + \begin{pmatrix}
+	n -1  \\
+	m -1
+	\end{pmatrix} $ para todos $n, m \in \mathbb{N}$.
+	
+	\subsection{Triângulo de Pascal}
+	
+	\begin{center}
+		\begin{tabular}{>{$}l<{$}|*{4}{c}}
+			\multicolumn{1}{l}{$n$} &&&&\\\cline{1-1} 
+			0 &$\begin{pmatrix}
+			0  \\
+			0
+			\end{pmatrix}$&&&\\
+			1 &$\begin{pmatrix}
+			1  \\
+			0
+			\end{pmatrix}$&$\begin{pmatrix}
+			1  \\
+			1
+			\end{pmatrix}$&&\\
+			2 &$\begin{pmatrix}
+			2  \\
+			0
+			\end{pmatrix}$&$\begin{pmatrix}
+			2  \\
+			1
+			\end{pmatrix}$&$\begin{pmatrix}
+			2  \\
+			2
+			\end{pmatrix}$&\\
+			3 &$\begin{pmatrix}
+			3  \\
+			0
+			\end{pmatrix}$&$\begin{pmatrix}
+			3  \\
+			1
+			\end{pmatrix}$&$\begin{pmatrix}
+			3  \\
+			2
+			\end{pmatrix}$&$\begin{pmatrix}
+			3  \\
+			3
+			\end{pmatrix}$\\\hline
+			\multicolumn{1}{l}{} &$0$&$1$&$2$&$3$\\\cline{2-5}
+			\multicolumn{1}{l}{} &\multicolumn{4}{c}{$m$}
+		\end{tabular}
+	\end{center}
+	
+	\begin{center}
+		\begin{tabular}{>{$}l<{$}|*{8}{c}}
+			\multicolumn{1}{l}{$n$} &&&&&&&\\\cline{1-1} 
+			0 &$1$&&&&&&\\
+			1 &$1$&$1$&&&&&\\
+			2 &$1$&$2$&$1$&&&&\\
+			3 &$1$&$3$&$3$&$1$&&&\\
+			4 &$1$&$4$&$6$&$4$&$1$&&\\
+			5 &$1$&$5$&$10$&$10$&$5$&$1$&\\
+			6 &$1$&$6$&$15$&$20$&$15$&$6$&$1$\\
+			7 &$1$&$7$&$21$&$35$&$35$&$21$&$7$&$1$\\\hline
+			\multicolumn{1}{l}{} &$0$&$1$&$2$&$3$&$4$&$5$&$6$&$7$\\\cline{2-9}
+			\multicolumn{1}{l}{} &\multicolumn{8}{c}{$m$}
+		\end{tabular}
+	\end{center}
+	
+	\notagrande{Obs.: se plotarmos uma curva, ela terá a forma de uma curva gaussiana/curva de Gauss.}
+	
+	\subsection{Teorma 2 (Binomial)}
+	
+	Se $a, b \in \mathbb{R}$ e $n \in \mathbb{N}$, então:
+	
+	\begin{equation*}
+		 (a+b)^{n} = \sum_{i=0}^{n} \begin{pmatrix}
+		 n  \\
+		 i
+		 \end{pmatrix} a^{i} b^{n-i} = \begin{pmatrix}
+		 n  \\
+		 0
+		 \end{pmatrix} a^{0} b^{n} + \begin{pmatrix}
+		 n  \\
+		 1
+		 \end{pmatrix} a^{1} b^{n-1} + \begin{pmatrix}
+		 n  \\
+		 2
+		 \end{pmatrix} a^{2} b^{n+1} + \dots
+	\end{equation*}
+	
+	\subsubsection{Exemplo 9}
+	
+	Resposta:
+	
+	$ a+b^{4} = \begin{pmatrix}
+	4  \\
+	0
+	\end{pmatrix} a^{0} b^{4} + \begin{pmatrix}
+	4  \\
+	1
+	\end{pmatrix} + a^{1} b^{3} + \begin{pmatrix}
+	4  \\
+	2
+	\end{pmatrix} a^{2} b^{2} + \begin{pmatrix}
+	4  \\
+	3
+	\end{pmatrix} a^{3} b^{1} + \begin{pmatrix}
+	4  \\
+	4
+	\end{pmatrix} a^{4} b^{0} = b^{4} + 4ab^{3} + 6 a^{2} b^{2} + 4a^{3}6 + a^{4}$
+	
+	\subsubsection{Exemplo 10}
+	
+	\noindent Quantos subconjuntos tem um conjunto com $n$ elementos? Quantos subconjuntos com $m$ elementos tem um conjunto com $n$ elementos?
+	
+	Resposta:
+	
+	\begin{equation*}
+	 \sum_{m=0}^{n} \begin{pmatrix}
+	n  \\
+	m
+	\end{pmatrix} = \sum_{m=0}^{n} \begin{pmatrix}
+	n  \\
+	m
+	\end{pmatrix} 1^{m} \cdot 1^{n-m} = (1+1)^{m} = 2^{m} 
+	\end{equation*}
+	
+	\section{Coeficientes e Teorema Multinomial}
+	
+	\subsection{Definição 3}
+	
+	Se $ n, n_{1}, n_{2}, \dots, n_{r} \in \mathbb{Z}_{+}$ e $r \in \mathbb{N}, r > 2$ forem t. q. $n_{1} + n_{2} + \dots + n_{r} = n$ o coeficiente multinomial.
+	
+	$ \begin{pmatrix}
+	n  \\
+	n, n_{2}, \dots, n_{r}
+	\end{pmatrix}$ defini-se por $ \dfrac{n!} {n_{1}! n_{2}! \dots n_{r}!} $
+	
+	\subsection{Teorema 3 (Multinomial)}
+	
+	\begin{equation*}
+		(x_{1} + x_{2} + \dots + x_{r})^{n} = \sum \begin{pmatrix}
+		n  \\
+		n_{1}, n_{2}, \dots, n_{r}
+		\end{pmatrix} \cdot x_{1}^{n_{1}} \cdot x_{2}^{n_{2}} \cdot x_{3}^{n_{3}} \cdot \dots \cdot x_{r}^{n_{r}}
+	\end{equation*}
+	
+	\subsubsection{Exemplo 12}
+	
+	\notagrande{O Exemplo 11 será abordado depois}
+	
+	\noindent Enunciado suprimido. $( \overbrace{a}^\text{$1$} + \overbrace{b}^\text{$1$} + \overbrace{c}^\text{$1$} )^{3} = ?$
+	
+	Resposta:
+	
+	$	\begin{pmatrix}
+		3  \\
+		3,0,0
+		\end{pmatrix} a^{3} b^{0}  c^{0} + \begin{pmatrix}
+		3  \\
+		0,3,0
+		\end{pmatrix} a^{0} b^{3}  c^{0} + \begin{pmatrix}
+		3  \\
+		0,0,3
+		\end{pmatrix} c^{3} + \begin{pmatrix}
+		3  \\
+		3,0,0
+		\end{pmatrix} a^{3} b^{0}  c^{0} + \begin{pmatrix}
+		3  \\
+		2,1,0
+		\end{pmatrix} a^{2} b^{1}  c^{0} + \begin{pmatrix}
+		3  \\
+		2,0,1
+		\end{pmatrix} a^{2} b^{0}  c^{1} + \begin{pmatrix}
+		3  \\
+		1,2,0
+		\end{pmatrix} ab^{2} + \begin{pmatrix}
+		3  \\
+		0,2,1
+		\end{pmatrix} b^{2} c + \begin{pmatrix}
+		3  \\
+		1,0,2
+		\end{pmatrix} ac^{2} + \begin{pmatrix}
+		3  \\
+		0,1,2
+		\end{pmatrix} bc^{2} + \begin{pmatrix}
+		3  \\
+		1,1,1
+		\end{pmatrix} abc $
+	
+	\noindent Qual a soma dos coeficientes multinomiais?
+	
+	Resposta:
+	
+	$ (1+1+1)^{3} = 3^{3} = 27 $
+
+	\aula{Faltei na aula de 08/10/2018}
+	
+	Motivo da falta: atraso.
+	
+	\aula{Início da aula de 10/10/2018}
+	
+	\section{Teoria Axiomática da Probabilidade}
+	
+	A teoria está centrada em três termos, que conformam o \textbf{Espaço de Probabilidade}:
+	
+	\begin{itemize}
+		\item Espaço amostral ($\varOmega$)
+		\item Espaço de eventos ($\varepsilon$)
+		\item Medida de probabilidade ($\mathbb{P}$)
+	\end{itemize}
+	
+	Ao invés da letra omega ($\varOmega$), Ross\cite{ross2010} usa a letra $S$, de \textit{sample}, sendo sample a amostra em inglês. Quanto a $\mathbb{P}$, um estudo matemático mais aprofundado requer se debruçar sobre a Teoria da Medida e Integração.
+	
+	\subsection{Espaço amostral}
+	
+	\noindent Ideia: um conjunto de todos os possíveis resultados de um experimento aleatório.
+	
+	Símbolo: $\varOmega, S$ 
+	
+	$\omega \in \varOmega$
+	
+	\subsubsection{Exemplo 1}
+	
+	\noindent Lançamento de uma moeda.
+	
+	$\varOmega = \{x,c\}, \{0,1\} $	
+	
+	\subsubsection{Exemplo 2}
+	
+	\noindent Lançamento de duas moedas.
+	
+	$\varOmega = \{0,1\} \times \{0,1\} = \{(0,0),(0,1),(1,0),(1,1)\} $
+	
+	\subsubsection{Exemplo 3}
+	
+	\noindent Lançamento de $n$ moedas.
+	
+	$ \{0,1\} \times \{0,1\} \times \{0,1\} \times \dots \times \{0,1\} = \{0,1\}^{n} $
+	
+	\subsubsection{Exemplo 4}
+	
+	\noindent Lançamento de 3 dados.
+	
+	$ \{1,2,3,4,5,6\}^{3} $
+	
+	\subsubsection{Exemplo 5}
+	
+	\noindent Lançamento de infinitas moedas.
+	
+	$ \varOmega = \{0,1\} \times \{0,1\} \times \{0,1\} \times \dots \times \{0,1\} \doteq \{0,1\}^{\mathbb{N}} $
+	
+	\notagrande{Obs.: acredito que os exemplos 4 e 7 foram suprimidos, provavelmente por questão de tempo}
+	
+	\subsubsection{Exemplo 7}
+	
+	\noindent Tempo de vida (em horas) de uma lâmpada.
+	
+	$ \varOmega = [0+00] \ni t $
+	
+	\subsubsection{Exemplo 8}
+	
+	\noindent Número aleatório.
+	
+	$ \varOmega [0,1] $
+	
+	\subsection{Eventos}
+	
+	\subsubsection{Definição 2}
+	
+	\notagrande{Definição preliminar}
+	
+	Um evento é um subconjunto de $\varOmega$.
+	
+	\subsubsection{Exemplo 9} \label{sssec:ex9}
+	
+	\notagrande{\nameref{sssec:ex9} $\Rightarrow$ Exemplo 1}
+	
+	$ \varOmega = \{c,k\}, \mathbb{P}(\varOmega)=\{\{c\},\{k\},0,\{c,k\}\} $
+	
+	$ E = \{c\} \subset \{c,k\} $
+	
+	\nota{Preciso revisar isso aqui!}$ E = \subset \in \{c,k\} $
+	
+	\subsubsection{Exemplo 10} \label{sssec:ex10}
+	
+	\noindent Moeda.
+	
+	\notagrande{\nameref{sssec:ex10} $\Rightarrow$ Exemplo 2}
+	
+	$ \varOmega = \{c,k\}^{2} $
+	
+	$ |\varOmega| = 2^{2} = 4 $
+	
+	$ |\mathbb{P}(\varOmega)| = 2^{4} = 16 $
+	
+	\nota{Lê-se em português: ``saiu pelo menos $1$ coroa''}$ E = \{ (k,k),(k,c),(c,k) \} $
+	
+	\nota{Lê-se em português: ``não saiu coroa''}$ E^{c} = \{(c,c)\} $
+	
+	\aula{Faltei na aula de 17/10/2018}
+	
+	Motivo da falta: entrevista na PMSP/SMDU.
+	
+	\aula{Início da aula de 22/10/2018}
+	
+	Prof. Thomas recorda a fórmula $P(A \bigcup B) = P(A) + P(B) - P(A \bigcap B)$, usada na última aula. Comenta que ela pode ser usada para áreas, afinal, a probabilidade é uma medida.
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}[
+		thick]
+		\draw [fill=cyan, fill opacity=0.5] (0,0) circle (2cm);
+		\draw [fill=orange, fill opacity=0.5] (3,-1) circle (2.5cm);
+	    \draw (0,0) ++(120:2cm) -- ++(120:2.2cm) node [fill=white,inner sep=5pt](a){$A$};
+	    \draw (3, -1) ++(30:2.5cm) -- ++(30:2.6cm) node [fill=white,inner sep=5pt](b){$B$};
+		\end{tikzpicture}
+	\end{figure}
+	
+	Prof. Thomas constrói ainda duas outras fórmulas, ampliando a lógica para quatro blocos:
+	
+	$ P (A \bigcup B \bigcup C) = P(A) + P(B) + P(C) - P(A \bigcap B) - P(A \bigcap C) - P(B \bigcap C) + P(A \bigcap B \bigcap C) $
+	
+	$ P (A \bigcup B \bigcup C \bigcup D) = P(A) + P(B) - P(C) + P(D) - P(A \bigcap B) - \dots + P(A \bigcap B \bigcap C) + \dots - P(A \bigcap B \bigcap C \bigcap D) $.
+	
+	A fórmula inicial diz respeito à Proposição 5.
+	
+	\subsection{Proposição 6}
+	
+	\textbf{Fórmula de Inclusão-Exclusão}. Se $ E_{1}, E_{2}, \dots, E_{n} $ forem eventos em um espaço amostral $\varOmega$ e $\mathbb{P}$ for uma medida de provabilidade (em $\varepsilon$), então $ P(U^{n}_{i=1} E_{i}) = \sum_{i=1}^{n} P(E_{i}) - \sum_{i_{1} \le i_{2}} P ( E_{i_{1}} \bigcap E_{i_{2}} ) + \sum_{i_{1} \le i_{2} \le i_{3}} P ( E_{i_{1}} \bigcap E_{i_{2}} \bigcap E_{i_{3}} ) - \dots + \\ (-1)^{n+1} P( n_{i=1}^{n} E_{i} ) $
+	
+	\subsubsection{Exemplo 17}
+	
+	\notagrande{O exemplo não está completo}
+	
+	(b) $ \varOmega = \{1,2,3,4,5,6\} $
+	
+	$ P(\{i\}) = \frac{1}{6}, i = 1,2,3,4,5,6$
+	
+	$ A = \{1,2\}, B = \{1,3\}, C = \{1,4\}, D = \{1,5\} $
+	
+	falta colocar
+	
+	\subsection{Proposição 7}
+	
+	\textbf{Desigualdades de Bonferroni.} Primeira desigualdade de Bonferroni: sub-aditividade.
+	
+	\begin{equation*}
+		P(U_{i=1}^{n} E_{i}) \leq \sum_{i=1}^{n} P(E_{i})
+	\end{equation*}
+	
+	\subsubsection{Definição 4}
+	
+	A tríade ($\varOmega, \varepsilon, \mathbb{P}$) denomina-se \textbf{Espaço de Probabilidade}.
+	
+	\subsection{Espaços Dep. Equiprováveis}
+	
+	Resumo:
+	
+	$ \varOmega = { w_{1}, w_{2}, \dots, w_{n}}, |\varOmega| = n $
+	
+	$ \varepsilon = P(\varOmega), |\varepsilon|= 2^{n} $
+	
+	$ \underbrace{\mathbb{P}(\{w_{i}\}) = \frac{1}{n}, i = 1, 2, \dots, n}_{\mathbb{P} = \frac{|E|}{|\varOmega|} = \frac{|E|}{n}} $
+	
+	\subsubsection{Exemplo 18}
+	
+	\noindent Jogam-se dois dados (honestos). Qual a probabilidade de a soma das faces observadas ser $8$?
+	
+	
+	% ----------------------------------------------------------
+	
+	\listoftodos[Lista de anotações]
+	
+	\bibliography{fontes.bib}
+	
+\end{document}
+
+
