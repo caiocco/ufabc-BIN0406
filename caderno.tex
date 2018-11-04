@@ -10,9 +10,10 @@
 \usepackage{hyperref}
 \usepackage[default,scale=0.95]{opensans}
 \usepackage{fancyhdr}
-\usepackage{tikz}
+\usepackage{pgf,tikz,pgfplots}
 \usepackage{amsfonts}
 \usepackage{mathtools}
+\usepackage{mathrsfs}
 \usepackage{nameref}
 \usepackage{indentfirst}
 \usepackage{array}
@@ -23,12 +24,19 @@
 %\setlength{\parindent}{0pt}%
 
 \usetikzlibrary{arrows,chains,fit,quotes,positioning,shapes}
+\pgfplotsset{compat=1.13}
 
 \newcommand{\aula}[2][]{\todo[inline,color=blue!10, #1]{\textbf{#2}}}
 \newcommand{\nota}[2][]{\todo[color=yellow!30,linecolor=black, #1]{#2}}
 \newcommand{\revisar}[2][]{\todo[color=red!30,linecolor=black, #1]{#2}}
 \newcommand{\notagrande}[2][]{\todo[inline,color=orange!30, #1]{#2}}
+\newcommand*\bolinha[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
 \renewcommand\CancelColor{\color{red}}
+
+\definecolor{ffqqqq}{rgb}{1.,0.,0.}
+\definecolor{qqzzcc}{rgb}{0.,0.6,0.8}
+\definecolor{eqeqeq}{rgb}{0.8784313725490196,0.8784313725490196,0.8784313725490196}
 
 \fancypagestyle{plain}{
 	\fancyhf{} %Clear Everything.
@@ -714,6 +722,8 @@
 	
 	$ \underbrace{\mathbb{P}(\{w_{i}\}) = \frac{1}{n}, i = 1, 2, \dots, n}_{\mathbb{P} = \frac{|E|}{|\varOmega|} = \frac{|E|}{n}} $
 	
+	\notagrande{$\frac{|E|}{|\varOmega}$: casos favoráveis; $\frac{|E|}{n}$: total de casos}
+	
 	\subsubsection{Exemplo 18}
 	
 	\noindent Jogam-se dois dados (honestos). Qual a probabilidade de a soma das faces observadas ser $8$?
@@ -805,9 +815,43 @@
 	
 	Thomas comenta que a ideia da probabilidade condicional já estava sendo discutida informalmente por nós.
 	
-	Falta figura
+	\begin{figure}[h!]
+		\caption{Parcela de evento contida em outro}
+		\label{fig:eventocont}
+		\centering
+		% Figura construída com o GeoGebra
+		% Deu muito mais trabalho do que eu originalmente previa
+		\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0230800747325017cm]
+		\clip(-3.0129660786567976,-2.2992332367212254) rectangle (3.013079816051663,1.708273214884726);
+		\fill[line width=2.pt,color=eqeqeq,fill=eqeqeq,fill opacity=0.10000000149011612] (-3.,1.4) -- (3.,1.4) -- (3.,-2.) -- (-3.,-2.) -- cycle;
+		\fill[line width=2.pt,color=qqzzcc,fill=qqzzcc,fill opacity=0.10000000149011612] (-2.,1.) -- (-2.,0.) -- (1.,-1.5) -- (2.,1.) -- cycle;
+		\fill[line width=2.pt,color=ffqqqq,fill=ffqqqq,fill opacity=0.10000000149011612] (0.29411764705882326,1.) -- (2.,1.) -- (1.,-1.5) -- (-0.893617021276596,-0.5531914893617021) -- cycle;
+		\draw [line width=0.4pt] (-3.,1.4)-- (3.,1.4);
+		\draw [line width=0.4pt] (3.,1.4)-- (3.,-2.);
+		\draw [line width=0.4pt] (3.,-2.)-- (-3.,-2.);
+		\draw [line width=0.4pt] (-3.,-2.)-- (-3.,1.4);
+		\draw [line width=2.pt] (0.6,1.4)-- (-2.,-2.);
+		\draw [line width=2.pt,color=qqzzcc] (-2.,1.)-- (-2.,0.);
+		\draw [line width=2.pt,color=qqzzcc] (-2.,0.)-- (1.,-1.5);
+		\draw [line width=2.pt,color=qqzzcc] (1.,-1.5)-- (2.,1.);
+		\draw [line width=2.pt,color=qqzzcc] (2.,1.)-- (-2.,1.);
+		\draw [shift={(0.7698292351481737,1.2292405909583572)},line width=2.pt,color=ffqqqq]  plot[domain=2.35346341974507:4.399208226254447,variable=\t]({1.*0.240833438058889*cos(\t r)+0.*0.240833438058889*sin(\t r)},{0.*0.240833438058889*cos(\t r)+1.*0.240833438058889*sin(\t r)});
+		\draw [line width=2.pt,color=ffqqqq] (0.29411764705882326,1.)-- (2.,1.);
+		\draw [line width=2.pt,color=ffqqqq] (2.,1.)-- (1.,-1.5);
+		\draw [line width=2.pt,color=ffqqqq] (1.,-1.5)-- (-0.893617021276596,-0.5531914893617021);
+		\draw [line width=2.pt,color=ffqqqq] (-0.893617021276596,-0.5531914893617021)-- (0.29411764705882326,1.);
+		\draw (-2.8946633371655883,1.3829405878170842) node[anchor=north west] {$B^{C}$};
+		\draw (2.177566704269999,1.3385770477624057) node[anchor=north west] {$B$};
+		\draw (-2.598906483437566,0.6139725602026581) node[anchor=north west] {$A$};
+		\draw (1.6599922102459594,-1.9073552995715657) node[anchor=north west] {$\varOmega$};
+		\draw (0.683994592943485,1.7896063716516364) node[anchor=north west] {$A \cup B$};
+		\begin{scriptsize}
+		\draw [fill=ffqqqq,shift={(0.6,1.4)},rotate=90] (0,0) ++(0 pt,3.75pt) -- ++(3.2475952641916446pt,-5.625pt)--++(-6.495190528383289pt,0 pt) -- ++(3.2475952641916446pt,5.625pt);
+		\end{scriptsize}
+		\end{tikzpicture}
+	\end{figure}
 	
-	Se possuímos interesse na parcela do avento $A$ que está contida em $B$, temos: $ \mathcal{P}(A | B) = \dfrac{\mathcal{P}(A \cap B)}{\mathcal{P}(B)>0} $
+	Se possuímos interesse na parcela do avento $A$ que está contida em $B$ (vide \autoref{fig:eventocont}), temos: $ \mathcal{P}(A | B) = \dfrac{\mathcal{P}(A \cap B)}{\mathcal{P}(B)>0} $
 	
 	\subsubsection{Definição 1}
 	
@@ -850,11 +894,11 @@
 	$ A \cap B! $
 	
 	$ |B| = \begin{pmatrix}
-	\overbrace{10}^\text{Escolha brancas} \\
+	\overbrace{10}^\text{escolha brancas} \\
 	7
 	\end{pmatrix} \cdot \begin{pmatrix}
 	10 \\
-	\underbrace{3}_\text{Escolha pretas}
+	\underbrace{3}_\text{escolha pretas}
 	\end{pmatrix} \cdot 10! $
 	
 	$ |A \cap B| = 10 \cdot \begin{pmatrix}
@@ -908,6 +952,79 @@
 	\subsubsection{Teorema 1 (Regra da Multiplicação)}
 	
 	Dados um espaço de probabilidade ($\varOmega, \varepsilon, \mathcal{P}$) e $E_{1}, E_{2}, \dots E_{n} \in \varepsilon$ t. q. $\mathcal{P}(E_{1} \cap E_{2} \cap \dots \cap E_{n-1}) > 0$, vale a fórmula:
+	
+	$ \mathcal{P} = (E_{1} \cap E_{2} \cap E_{3} \cap \dots \cap E_{n}) = \mathcal{P}(E_{1}) \cdot \mathcal{P}(E_{2} | E_{1}) \cdot \mathcal(E_{3} | E_{1} \cap E_{2}) \cdot \dots \cdot \mathcal{P}(E_{n} | E_{1} \cap E_{2} \cap \dots \cap E_{n-1}) $
+	
+	Prova:
+	
+	$ \cancel{\mathcal{P}(E_{1})} \cdot \dfrac{\mathcal{P}\cancel{(E_{1} \cap E_{2} \cap E_{3})}}{\mathcal{P}\cancel{(E_{1} \cap E_{2})}}, \dots, \dfrac{\boxed{\mathcal{P}(E_{1} \cap E_{2} \cap \dots E_{n})}}{\mathcal{P}(\cancel{E_{1} \cap E_{2} \cap \dots E_{n-1})}} = \mathcal{P}(n^{n}_{i=1}E_{i})$ \nota{Como se queria demonstrar (\textit{quod erat demonstrandum})}C.Q.D.
+	
+	\subsubsection{Exemplo 4}
+	
+	\noindent Um baralho com $52$ cartas é distribuído entre $4$ jogadores. Qual a probabilidade de que cada jogador receba $1$ ás?
+	
+	Resposta:
+	
+	$E_{i}$: o i-ésimo jogador recebe exatamente $1$ ás, $i=1,2,3,4$
+	
+	$E=E_{1} \cap E_{2} \cap E_{3} \cap E_{4}$: 1 ás em cada mão
+	
+	$\mathcal{P} = \underbrace{\mathcal{P}(E_{1})}_{\dfrac{\begin{pmatrix}
+			4 \\
+			1
+			\end{pmatrix} \cdot \begin{pmatrix}
+			48 \\
+			12
+			\end{pmatrix}}{\begin{pmatrix}
+			52 \\
+			13
+			\end{pmatrix}}} \cdot \underbrace{\mathcal{P}(E_{2}|E_{1})}_{\dfrac{\begin{pmatrix}
+			3 \\
+			1
+			\end{pmatrix} \cdot \begin{pmatrix}
+			36 \\
+			12
+			\end{pmatrix}}{\begin{pmatrix}
+			39 \\
+			13
+			\end{pmatrix}}} \cdot \underbrace{\mathcal{P}(E_{3}|E_{1} \cap E_{2})}_{\dfrac{\begin{pmatrix}
+			2 \\
+			1
+			\end{pmatrix} \cdot \begin{pmatrix}
+			24 \\
+			12
+			\end{pmatrix}}{\begin{pmatrix}
+			26 \\
+			13
+			\end{pmatrix}}} \cdot \underbrace{\mathcal{P}(E_{4}|E_{1} \cap E_{2} \cap E_{3})}_{\dfrac{\begin{pmatrix}
+			1 \\
+			1
+			\end{pmatrix} \cdot \begin{pmatrix}
+			12 \\
+			12
+			\end{pmatrix}}{\begin{pmatrix}
+			13 \\
+			13
+			\end{pmatrix}}} = $
+	
+	$ \dfrac{39 \cdot 26 \cdot 13}{51 \cdot 50 \cdot 49} \approx 10,5\% $
+	
+	Sem usar a probabilidade condicional:
+	
+	$ \overbracket{\bolinha{01} \bolinha{02} \dots \bolinha{13}}^\text{Primeira}  \overbracket{\bolinha{14} \dots \bolinha{26}}^\text{Segunda}  \overbracket{\bolinha{27} \dots \bolinha{39}}^\text{Terceira}  \overbracket{\bolinha{40} \dots \bolinha{52}}^\text{Quarta} =$
+	
+	$ \dfrac{52!}{13!13!13!13!} = \begin{pmatrix}
+	52 \\
+	13, 13, 13, 13
+	\end{pmatrix} $
+	
+	$ |\varOmega| = 52! $
+	
+	$ |\varOmega| = 13!^{4} $
+	
+	$ |E| = 48! = 4! $
+	
+	$ |E| = 12!^{4} = 4! $
 	
 	% ----------------------------------------------------------
 	
