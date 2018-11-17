@@ -19,6 +19,7 @@
 \usepackage{indentfirst}
 \usepackage{array}
 \usepackage{cancel}
+\usepackage{enumitem}
 \usepackage[alf]{abntex2cite}
 
 \setlength{\parskip}{\baselineskip}
@@ -1151,7 +1152,7 @@
 	
 	\subsubsection{Definição 2}
 	
-	Em um espaço de probabilidade ($\varOmega$, $\epsilon$, $\mathcal{P}$), dois eventos $A, B$ são independentes, sse\notaesq{Lê-se ``sse'' como ``se e somente se'} $\mathcal{P}(A \cap B) = \mathcal{P}(A) \cdot \mathcal{P}(B)$.
+	Em um espaço de probabilidade ($\varOmega$, $\epsilon$, $\mathcal{P}$), dois eventos $A, B$ são independentes, sse\notaesq{Lê-se ``sse'' como ``se e somente se''} $\mathcal{P}(A \cap B) = \mathcal{P}(A) \cdot \mathcal{P}(B)$.
 	
 	Ideia:
 	
@@ -1184,15 +1185,58 @@
 	
 	$\varOmega = \{1,2,3,4,5,6\}^{2}, \mathcal{P}(\{(i,j)\}) = \overbrace{\frac{1}{36}}^{\forall(i,j) \in \varOmega} \rightarrow$ espaço equiprovável
 	
+	$\underbrace{\{ (i,j) \}}_{\dfrac{1}{36} \quad =} = \underbrace{\overbracket{\{ (k,l) \in \varOmega i K = i \}}^\text{$i$ no primeiro dado}}_{\dfrac{1}{6} \qquad \times} \cup \underbrace{\overbracket{\{ (K,l) \in \varOmega \}: l = j}^\text{$j$ no segundo dado}}_{\dfrac{1}{6}}$
 	
+	$E_{1}$: ``soma das faces é $6$'' $= \{(i,j): i+j=6\}$
+	
+	$E_{2}$: ``soma das faces é $7$'' $= \{(i,j): i+j=6\}$
+	
+	$F$: 1º lançamento é $4$
+	
+	$G$: 2º lançamento é $3$
+	
+	$|E_{1}|=5 \rightarrow \mathcal{P}(E_{1}) = \frac{5}{36}$
+	
+	$|E_{2}|=6 \rightarrow \mathcal{P}(E_{2}) = \frac{1}{6}$
+	
+	$|F|=6 \rightarrow \mathcal{P}(F) = \frac{1}{6}$
+	
+	$|G|=6 \rightarrow \mathcal{P}(F) = \frac{1}{6}$
+	
+	$\underbrace{\mathcal{P}(E_{1}|F)>\mathcal{P}(E_{1})=\frac{5}{36}}_{\dfrac{|E_{1} \cap F|}{|F|} = \dfrac{1}{6} = \dfrac{5}{6}}$
+	
+	$G \cap E_{2} = \{(4,3)\}$
+	
+	$\mathcal{P}(F|E_{1})=\dfrac{\mathcal{P}(F \cap E_{1})}{\mathcal{P}(E_{1})} = \dfrac{|F \cap E_{1}|}{|E_{1}|} = \dfrac{1}{5} > \dfrac{1}{6} = \mathcal{P}(F)$
+	
+	$\mathcal{P}(G|E_{2})=\dfrac{\mathcal{P}(G \cap E_{2})}{\mathcal{P}(E_{2})} = \dfrac{|G \cap E_{2}|}{|E_{2}|} = \dfrac{1}{6} = \dfrac{1}{36} = \dfrac{|G|}{|\varOmega|} = \mathcal{P}(G)$
 	
 	\subsubsection{Exemplo 10}
 	
 	\noindent Dado honesto de quatro faces.
 	
+	$\varOmega = \{1,2,3,4\}, \mathcal{P}(\{i\}) = \frac{1}{4}, i=1,2,3,4$
+	
+	$A=\{1,2\}, B=\{1,3\}, C=\{1,4\}$
+	
+	$\mathcal{P}(A) = \mathcal{P}(B) = \mathcal{P}(C) = \frac{2}{4} = \frac{1}{2}$
+	
+	$\mathcal{P}(A \cap B)=\mathcal{P}(A \cap C)=\mathcal{P}(B \cap C)=\mathcal{P}(\{1\}) \rightarrow A \bot B, A \bot C, B \bot C$. Mas $\mathcal{P}(A \cap B \cap C) = \mathcal{P}(\{1\}) = \frac{1}{4} \neq \frac{1}{1} = \mathcal{P}(A) \cdot \mathcal{P}(B) \cdot \mathcal{P}(C)$
+	
 	\subsubsection{Definição 2'}
 	
+	Em um espaço de probabilidade três eventos $A, B, C$ são independentes, sse:
+	
+	\begin{enumerate}[label=(\roman*)]
+		\item $\mathcal{P}(A \cap B) = \mathcal{P}(A) \cdot \mathcal{P}(B)$
+		\item $\mathcal{P}(A \cap B) = \mathcal{P}(A) \cdot \mathcal{P}(C)$
+		\item $\mathcal{P}(B \cap C) = \mathcal{P}(B) \cdot \mathcal{P}(C)$
+		\item $\mathcal{P}(A \cap B \cap C) = \mathcal{P}(A) \cdot \mathcal{P}(B) \cdot \mathcal{P}(C)$
+	\end{enumerate}
+	
 	\subsubsection{Definição 2'' (Final)}
+	
+	Uma coleção arbitrária de eventos $\{E_{i}\} i \in I$ é denominação de uma \textbf{coleção de eventos independentes}, sse para todo subconjunto finito de índices $\{i_{1}, i_{2}, \dots i_{n}\} \subset I, \mathcal{P}(E_{i_{1}} \cap E_{i_{2}} \cap \dots \cap E_{i_{n}}) = \mathcal{P}(E_{i_{1}}) \cdot \mathcal{P}(E_{i_{2}}) \cdot \dots \cdot \mathcal{P}(E_{i_{n}})$
 		
 	% ----------------------------------------------------------
 	
