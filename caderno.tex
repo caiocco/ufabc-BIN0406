@@ -7,6 +7,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[autostyle]{csquotes}
 \usepackage[colorinlistoftodos,portuguese,linecolor=black]{todonotes}
+\usepackage{marginnote}
 \usepackage{hyperref}
 \usepackage[default,scale=0.95]{opensans}
 \usepackage{fancyhdr}
@@ -32,6 +33,11 @@
 \newcommand{\notagrande}[2][]{\todo[inline,color=orange!30, #1]{#2}}
 \newcommand*\bolinha[1]{\tikz[baseline=(char.base)]{
 		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+\newcommand{\notaesq}[2][]{{%
+		\let\marginpar\marginnote
+		\reversemarginpar
+		\renewcommand{\baselinestretch}{0.8}%
+		\nota[#1]{#2}}}
 \renewcommand\CancelColor{\color{red}}
 
 \definecolor{ffqqqq}{rgb}{1.,0.,0.}
@@ -67,7 +73,7 @@
 
 \definecolor{Red}{rgb}{0.9,0.0,0.1}
 %\definecolor{Blue}{rgb}{0.1,0.1,0.9}
-\hyphenation{}
+%\hyphenation{}
 \pagestyle{fancy}
 
 % ----------------------------------------------------------
@@ -247,7 +253,7 @@
 	
 	$E_{P}$: $4!=n_{P}$
 	
-	\nota{``B'' de box}$E_{B}$: $4!=n_{B}$
+	$E_{B}$\notaesq{``B'' de box}: $4!=n_{B}$
 	
 	Resposta:
 	
@@ -275,7 +281,7 @@
 	
 	Resposta: Pelo \nota{Princípio Básico da Contagem}PBC: \label{PBC}
 	
-	$n \cdot (n-1) \cdot (n-2) \cdot \dots \cdot (n - m + 1) = \dfrac{n!}{n-m!}$ \nota{Lê-se: ``arranjo de $n$, $n$ a $m$'', extraindo $m$ de $n$ sem reposição}$= An,m$
+	$n \cdot (n-1) \cdot (n-2) \cdot \dots \cdot (n - m + 1) = \dfrac{n!}{n-m!} =$ \nota{Lê-se: ``arranjo de $n$, $n$ a $m$'', extraindo $m$ de $n$ sem reposição}$An,m$
 	
 	\noindent (b) Sem considerar a ordem
 	
@@ -740,7 +746,7 @@
 	
 	\subsubsection{Exemplo 21}
 	
-	\noindent \nota{Pode ser oportuno ler \citeonline[p.85--86]{morin2016}}Problema dos aniversários. Em uma sala há $23$ pessoas. Qual a probabilidade de que ninguém aniversarie no mesmo dia?
+	\noindent \nota{Pode ser oportuno ler \citeonline[p. 85--86]{morin2016}}Problema dos aniversários. Em uma sala há $23$ pessoas. Qual a probabilidade de que ninguém aniversarie no mesmo dia?
 	
 	Resposta:
 	
@@ -857,9 +863,7 @@
 	
 	Seja ($\varOmega$, $\epsilon$, $\mathcal{P}$) um espaço de probabilidade. Se $A, B \in \varepsilon$ e $\mathcal{P}(B) > 0, \mathcal{P}(A | B)$ a probabilidade (condicional) de $A$ dado $B$:
 	
-	\nota{Lê-se probabilidade de $A$ dado $B$}$\mathcal{P}(A | B) =$
-	
-	$\dfrac{\mathcal{P}(A \cap B)}{\mathcal{P}(B)}$
+	$\mathcal{P}(A | B)$\notaesq{Lê-se probabilidade de $A$ dado $B$} $= \dfrac{\mathcal{P}(A \cap B)}{\mathcal{P}(B)}$
 	
 	Em espaços equiprováveis:
 	
@@ -1030,11 +1034,57 @@
 	
 	\subsubsection{Teorema 2 (Probabilidade Total)}
 	
+	\begin{figure}
+		\caption{Pedaços adjuntos}
+		\label{fig:pedacosadj}
+		\missingfigure[figcolor=white]{Falta a figura dos pedaços adjuntos}
+	\end{figure}
+	
+	$(U_{i=1}^{n}E_{i}) = \varOmega$
+	
+	$A = A \cap \varOmega = A \cap (U_{i=1}^{n}E_{i}) = U_{i=1}^{n} (A \cap E_{i})$
+	
 	$\mathcal{P}(A) = \mathcal{P}(U_{n=1}^{n} A \cap E_{i}) = \sum_{i=1}^{n}\mathcal{P}(A \cap E_{i})$
 	
-	$\mathcal{P}(A|E_{i}) = \dfrac{\mathcal{P}(A \cap E_{i})}{\mathcal{P}(E_{i})} = \sum_{i=1}^{n} \mathcal{P}(A|E_{i}) \cdot \mathcal{P}(E_{i})$
+	$\mathcal{P}(A|E_{i}) = \dfrac{\mathcal{P}(A \cap E_{i})}{\mathcal{P}(E_{i})} = \sum_{i=1}^{n}$ \nota{Números que somam um $i$ para dois $E_{i}$ (média ponderada)}$\mathcal{P}(A|E_{i}) \cdot$ \nota{Pro\-ba\-bi\-li\-da\-de condicional}$\mathcal{P}(E_{i})$
+	
+	\noindent \textbf{Em um exemplo prático:} ($\varOmega$, $\epsilon$, $\mathcal{P}$) \textendash Se $E_{1}, E_{2}, \dots, E_{n}, A \in \varepsilon$ forem dois a dois disjuntos, $U_{i=1}^{n} E_{i} = \varOmega$ e $\mathcal{P}(E_{i}) > 0, i = 1, 2, \dots, n$ então:
+	
+	\begin{equation*}
+		\mathcal{P}(A) = \sum_{i=1}^{n} \mathcal{P}(A|E_{i}) \cdot \mathcal{P}(E_{i})
+	\end{equation*}
+	
+	\subsubsection{Exemplo 3}
+	
+	\noindent Um dado honesto com quatro faces $(1,2,3,4)$ é lançado. Se o resultado for $1$ ou $2$ o dado é lançado uma segunda vez. Qual a probabilidade de a soma dos resultados ser pelo menos $4$?
+	
+	Desenvolvimento e resposta:
+	
+	$E_{i}$: saiu $i$ no primeiro lançamento, $i=1,2,3,4$
+	
+	$\mathcal{P}(E_{i}) = \frac{1}{4}, i=1,2,3,4$
+	
+	$A$: soma menos $4$
+	
+	$\mathcal{P}(A|E_{i}) = \frac{1}{2}$
+	
+	$\mathcal{P}(A|E_{2})$\notaesq{Pro\-ba\-bi\-li\-da\-de da soma ser $4$ quando caindo $1,2,3,4$ no dado} $= \frac{3}{4}$
+	
+	$\mathcal{P}(A|E_{3})$: não pode mover o dado (contra regra); chance é $0$
+	
+	$\mathcal{P}(A|E_{4}) = 1$
+	
+	$\mathcal{P}(A) = \dfrac{1}{2} \cdot \dfrac{1}{4} + 0 \cdot \dfrac{1}{4} + 1 \cdot \dfrac{1}{4} + \dfrac{3}{4} \cdot \dfrac{1}{4} = \dfrac{2+3+0+4}{16} = \boxed{\dfrac{9}{16}}$\nota{Pro\-ba\-bi\-li\-da\-de é um número entre $0$ e $1$!} 
+	
+	Olhando a \autoref{fig:pedacosadj}:
+	
+	$\mathcal{P}(E_{i}|A) = \dfrac{\mathcal{P}(A \cap E_{i})}{\mathcal{P}(A)} = \dfrac{\mathcal{P}(A|E_{K}) \cdot \mathcal{P}(E_{K})}{\sum_{i=1}^{n} \mathcal{P}(A|E_{i}) \cdot \mathcal{P}(E_{i})}$
+	
+	$\mathcal{P}(A \cap E_{i}) = \{ \mathcal{P}(E_{i}) \cdot \mathcal{P}(A|E_{i}) \cup \mathcal{P}(A) \cdot \mathcal{P}(E_{i}|A) \}$
 	
 	\subsubsection{Teorema 3 (Bayes)}
+	
+	\notagrande{Pode ser oportuno conferir \citeonline[p. 89]{ross2010}}
 	
 	Em um espaço de probabilidade ($\varOmega, \varepsilon, \mathcal{P}$), se $E_{1}, E_{2}, \dots, E_{n}, A \in \varepsilon$ forem dois a dois disjuntos, $U^{n}_{i=1} E_{1} = \varOmega$ e $P(E_{i}) > 0, i = 1, 2, \dots, n$, então:
 	
@@ -1070,6 +1120,7 @@
 		\item Observa-se a cara.
 	\end{itemize}
 	
+	\marginpar
 	\noindent \nota{$\mathcal{P}(E_{2} | A) = ?$}Qual a probabilidade de a moeda escolhida ter sido a de duas caras?
 	
 	Desenvolvimento e resposta:
@@ -1095,10 +1146,12 @@
 	\aula{Início da aula de 14/11/2018}
 	
 	\subsection{Independência (de eventos)}
+
+	\notagrande{Pode ser oportuno conferir \citeonline[p. 106]{ross2010}}
 	
 	\subsubsection{Definição 2}
 	
-	Em um espaço de probabilidade ($\varOmega$, $\epsilon$, $\mathcal{P}$), dois eventos $A, B$ são independentes, \nota{Lê-se ``sse'' como ``se e somente se'}sse $\mathcal{P}(A \cap B) = \mathcal{P}(A) \cdot \mathcal{P}(B)$.
+	Em um espaço de probabilidade ($\varOmega$, $\epsilon$, $\mathcal{P}$), dois eventos $A, B$ são independentes, sse\notaesq{Lê-se ``sse'' como ``se e somente se'} $\mathcal{P}(A \cap B) = \mathcal{P}(A) \cdot \mathcal{P}(B)$.
 	
 	Ideia:
 	
@@ -1126,6 +1179,12 @@
 	\subsubsection{Exemplo 9}
 	
 	\noindent Lançamento de $2$ dados honestos.
+	
+	Desenvolvimento e resposta:
+	
+	$\varOmega = \{1,2,3,4,5,6\}^{2}, \mathcal{P}(\{(i,j)\}) = \overbrace{\frac{1}{36}}^{\forall(i,j) \in \varOmega} \rightarrow$ espaço equiprovável
+	
+	
 	
 	\subsubsection{Exemplo 10}
 	
