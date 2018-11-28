@@ -40,6 +40,8 @@
 		\renewcommand{\baselinestretch}{0.8}%
 		\nota[#1]{#2}}}
 \renewcommand\CancelColor{\color{red}}
+\newcommand\defeq{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily def}}}{=}}}
+\newcommand\noteq{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily not}}}{=}}}
 
 \definecolor{ffqqqq}{rgb}{1.,0.,0.}
 \definecolor{qqzzcc}{rgb}{0.,0.6,0.8}
@@ -1237,7 +1239,163 @@
 	\subsubsection{Definição 2'' (Final)}
 	
 	Uma coleção arbitrária de eventos $\{E_{i}\} i \in I$ é denominação de uma \textbf{coleção de eventos independentes}, sse para todo subconjunto finito de índices $\{i_{1}, i_{2}, \dots i_{n}\} \subset I, \mathcal{P}(E_{i_{1}} \cap E_{i_{2}} \cap \dots \cap E_{i_{n}}) = \mathcal{P}(E_{i_{1}}) \cdot \mathcal{P}(E_{i_{2}}) \cdot \dots \cdot \mathcal{P}(E_{i_{n}})$
-		
+	
+	\aula{Início da aula de 28/11/2018}
+	
+	\section{Variáveis aleatórias}
+	
+	\notagrande{Vamos tratar aqui das variáveis discretas. Vide capítulo 4 do programa do curso. Entenda por ``discreto'': finito ou enumerado}
+	
+	\subsection{Definição 1}
+	
+	Em um espaço de probabilidade $(\varOmega, \varepsilon, \mathcal{P})$, uma ``variável aleatória'' (v. a.) é uma função $X:\varOmega \rightarrow \mathbb{R}$.
+	
+	\subsection{Exemplo 1}
+	
+	\noindent Lançamentos (independentes) de três moedas honestas.
+	
+	$\varOmega = \{0,1\}^{3} = \{(0,0,0),(0,0,1),(0,1,0),(0,1,1),(1,0,0),(1,0,1),(1,1,0),(1,1,1)\}$
+	
+	$\varepsilon = \mathcal{P}(\varOmega), |\varepsilon| = 2^{8} = 256$
+	
+	$\mathcal{P}(\{\omega\}) = \frac{1}{8}, \forall \omega \in \varOmega$
+	
+	Defina a v. a. $x:(\varOmega \rightarrow \mathbb{R})$ por $x(\omega) = $ quantidade de $1$s (uns) em $\omega$.
+	
+	$\{y=3\} \{X=0\} \defeq \{\omega: X(\omega) = 0\} = \{(0,0,0)\} \rightarrow \mathcal{P}(X=0) = \frac{1}{8} = \mathcal{P}(0) = \mathcal{P}_{0}$\notaesq{$P_{0} = \mathbb{P}(\{\omega \in \varOmega: X(\omega) = 0\})$}
+	
+	$\{y=2\} \{X=1\} \defeq \{\omega: X(\omega) = 0\} = \{(0,0,1),(0,1,0),(1,0,0)\} \rightarrow \mathcal{P}(X=0) = \frac{3}{8} = \mathcal{P}(1) = P_{1}$
+	
+	$\{y=1\} \{X=2\} \defeq \{\omega: X(\omega) = 0\} = \{(0,1,1),(1,0,1),(1,1,0)\} \rightarrow \mathcal{P}(X=0) = \frac{3}{8} = \mathcal{P}(2) = P_{2}$
+	
+	$\{y=0\} \{X=3\} \defeq \{\omega: X(\omega) = 0\} = \{(1,1,1)\} \rightarrow \mathcal{P}(X=0) = \frac{1}{8} = \mathcal{P}(3) = P_{3}$
+	
+	$\mathcal{P}(X=x) = 0, \forall x \notin \{0,1,2,3\}$ 
+	
+	\notagrande{Notação: $\{x \in I\} \doteq \{\omega \in \varOmega: x(\omega) \in I\}$}
+	
+	\subsection{Definição 2}
+	
+	A função $\mathcal{P}_{x}: \mathbb{R} \rightarrow [0,1]$ definida por $\mathcal{P}_{x}(x) = \mathcal{P}(\{x=x\} \noteq  \mathcal{P}_{x})$ denomina-se \textbf{função massa de probabilidade (da variável aleatória) $x$}.
+	
+	\subsection{Definição 4}
+	
+	\notagrande{Pulando a Definição 3 devido à escassez de tempo}
+	
+	Uma variável aleatória $X$ denomina-se discreta, sse existir um conjunto de reais $\{x_{i}\} i \in I$, \textbf{finito ou enumerável} tal que:
+	
+	\begin{enumerate}
+		\item $\mathcal{P}(x_{i}) = P_{x_{i}} = P_{x_[i]} > 0$ para todo $i \in I$
+		\item $\sum_{i \in I} \mathcal{P}_{x_{i}} = 1$
+	\end{enumerate}
+	
+	\subsection{Exemplo 4} \label{sssec:ex4}
+	
+	\notagrande{\nameref{sssec:ex4} $\Rightarrow$ Exemplo 1}
+	
+	\noindent $X$, a v. a. do \nameref{sssec:ex4} é discreta, pois $\mathcal{P}_{0} + \mathcal{P}_{1} + \mathcal{P}_{2} + \mathcal{P}_{3} = 1$
+	
+	\subsubsection{Exemplo 6}
+	
+	\noindent Extraem-se $3$ bolas (sem reposição) de uma urna com $20$ bolas (numeradas de $1$ a $20$). Qual a probabilidade do maior valor extraído ser pelo menos $17$?
+	
+	Solução:
+	
+	$\varOmega = \{(i,j,k): 1 \leq i \leq j \leq k \leq 20\} \hspace{2cm} |\varepsilon|= 2^{\frac{20}{3}}$
+	
+	$\varOmega = ? \hspace{2cm} \begin{pmatrix}
+		20 \\
+		3
+	\end{pmatrix} = \dfrac{20 \cdot 19 \cdot 18}{3!} = \dfrac{20!}{17!3!}$
+	
+	(Assumindo a equiprobabilidade) \hspace{2cm} $\mathbb{P}(E) = \frac{|E|}{|\varOmega|}$
+	
+	Defina a v. a. $X: \varOmega \rightarrow \rightarrow \mathbb{R}$ por $X((i,j,k)) \defeq k$
+	
+	$X$ assume valores em $\{3,4,5,\dots,19,20\}$
+	
+	$\mathcal{P}(X \leq 17) = ? \hspace{1cm} \mathcal{P}_{17} + \mathcal{P}_{18} + \mathcal{P}_{19} + \mathcal{P}_{20} = 50,8\%$
+	
+	Alternativamente, $\mathcal{P}(X \leq 17) = 1-\mathcal{P}(X \leq 16) = 1 - \frac{\begin{pmatrix}
+		16 \\
+		3
+		\end{pmatrix}}{\begin{pmatrix}
+		20 \\
+		3
+		\end{pmatrix}} = 50,8\%$
+	
+	$\mathcal{P}_{20} = \frac{\begin{pmatrix}
+		19 \\
+		2
+		\end{pmatrix}}{\begin{pmatrix}
+		20 \\
+		3
+		\end{pmatrix}} = \dfrac{3}{20} = 15\%$
+	
+	$\mathcal{P}_{19} = \frac{\begin{pmatrix}
+		18 \\
+		2
+		\end{pmatrix}}{\begin{pmatrix}
+		20 \\
+		3
+		\end{pmatrix}} = \dfrac{51}{380} = 13,4\%$
+	
+	$\mathcal{P}_{18} = \frac{\begin{pmatrix}
+		17 \\
+		2
+		\end{pmatrix}}{\begin{pmatrix}
+		20 \\
+		3
+		\end{pmatrix}} = \dfrac{34}{285} = 11,9\%$
+	
+	$\mathcal{P}_{17} = \frac{\begin{pmatrix}
+		16 \\
+		2
+		\end{pmatrix}}{\begin{pmatrix}
+		20 \\
+		3
+		\end{pmatrix}} = \dfrac{2}{19} = 10,5\%$
+	
+	\subsubsection{Exercício 1}
+	
+	\noindent Calcule os demais valores de $\mathcal{P}_{i}$ e mostre que $\sum_{i=3}^{20} \begin{pmatrix}
+	i-1 \\
+	2
+	\end{pmatrix} = \begin{pmatrix}
+	20 \\
+	3
+	\end{pmatrix}$.
+	
+	\subsubsection{Exemplo 7}
+	
+	\noindent Lançamentos sequenciais de moedas.
+	
+	$\varOmega = \{0,1\}^{\mathbb{N}} = \{0,1\} \times \{0,1\} \times \{0,1\} \times \dots \times \{0,1\} \times \dots$: conjunto das sequências $\epsilon = \epsilon_{1} \epsilon_{2} \epsilon_{3} \dots \epsilon_{n} \dots$ onde $\epsilon_{n} \in \{0,1\}$ para todo $n$.
+	
+	\noindent Defina a v. a. $X_{i}$ como o resultado do i-ésimo lançamento, \textit{i. e.} $X_{i}(\epsilon = \epsilon_{1} \epsilon_{2} \dots \epsilon_{i} \dots) = \epsilon_{i}$
+	
+	\noindent Assuma que os lançamentos sejam independentes e que $\boxed{\mathbb{P}(X_{i}=1) = p \in [0,1]}$
+	
+	\noindent Defina a v. a. $Y: \varOmega \rightarrow \mathbb{R}$ por $Y(\omega) = min \{i:X_{i}(\omega)=1\}$.
+	
+	$Y$ assume valores em $\{1,2,3, \dots, u, \dots, \infty\} = \mathbb{N} \cup \{\infty\}$
+	
+	$\mathcal{P}_{1} = \mathcal{P}(Y = 1) = \mathcal{P}(X_{1} = 1) = p$
+	
+	$\mathcal{P}_{2} = \mathcal{P}(Y = 2) = \mathcal{P}(X_{1} = 0, X_{2} = 1) = (1-p) \cdot p$
+	
+	$\vdots$
+	
+	$\mathcal{P}_{n} = \mathcal{P}(Y = n) = \mathcal{P}(X_{1} = 0, X_{2} = 0, \dots, X_{n-1} = 0, X_{n} = 1) = (1-p)^{n-1} \cdot p$
+	
+	$\vdots$
+	
+	$\mathcal{P}_{\infty} = \mathcal{P}(Y = \infty) = \mathbb{P}(X_{1} = 0, X_{2} = 0, \dots, X_{n} = 0, \dots) = (1-p)^{\infty} = 0$ (se $p>0$)
+	
+	$\sum_{i=1}^{\infty} \mathcal{P}_{i} = \mathcal{P}_{1} + \mathcal{P}_{2} + \mathcal{P}_{3} + \dots + \mathcal{P}_{n} + n = \sum_{n=1}^{\infty} \mathcal{P},(1-\mathcal{P})^{n-1} = \dfrac{\mathcal{P}}{1-(1-\mathcal{P})} = \dfrac{\mathcal{P}}{\mathcal{P}} = 1$
+	
+	\notagrande{Prova 2 prevista dia 14/12/2018.}
+	
 	% ----------------------------------------------------------
 	
 	\listoftodos[Lista de anotações]
