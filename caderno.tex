@@ -1295,7 +1295,7 @@
 	
 	\noindent $X$, a v. a. do \nameref{sssec:ex4} é discreta, pois $\mathcal{P}_{0} + \mathcal{P}_{1} + \mathcal{P}_{2} + \mathcal{P}_{3} = 1$
 	
-	\subsubsection{Exemplo 6}
+	\subsection{Exemplo 6}
 	
 	\noindent Extraem-se $3$ bolas (sem reposição) de uma urna com $20$ bolas (numeradas de $1$ a $20$). Qual a probabilidade do maior valor extraído ser pelo menos $17$?
 	
@@ -1356,7 +1356,7 @@
 		3
 		\end{pmatrix}} = \dfrac{2}{19} = 10,5\%$
 	
-	\subsubsection{Exercício 1}
+	\subsection{Exercício 1}
 	
 	\noindent Calcule os demais valores de $\mathcal{P}_{i}$ e mostre que $\sum_{i=3}^{20} \begin{pmatrix}
 	i-1 \\
@@ -1366,7 +1366,7 @@
 	3
 	\end{pmatrix}$.
 	
-	\subsubsection{Exemplo 7}
+	\subsection{Exemplo 7}
 	
 	\noindent Lançamentos sequenciais de moedas.
 	
@@ -1395,6 +1395,61 @@
 	$\sum_{i=1}^{\infty} \mathcal{P}_{i} = \mathcal{P}_{1} + \mathcal{P}_{2} + \mathcal{P}_{3} + \dots + \mathcal{P}_{n} + n = \sum_{n=1}^{\infty} \mathcal{P},(1-\mathcal{P})^{n-1} = \dfrac{\mathcal{P}}{1-(1-\mathcal{P})} = \dfrac{\mathcal{P}}{\mathcal{P}} = 1$
 	
 	\notagrande{Prova 2 prevista dia 14/12/2018.}
+	
+	\aula{Início da aula de 03/12/2018}
+	
+	\notagrande{Cheguei com aproximadamente uma hora de atraso.}
+	
+	\subsection{Exemplo 11}
+	
+	\noindent Uma urna possui $3$ bolas brancas, $5$ pretas e $3$ azuis. São extraídas $3$ bolas (sem reposição). Considere a quantidade de pretas menos a quantidade de brancas (após a extração). Qual o valor médio?
+	
+	Solução se $x$ a diferença em questão: $x \in \{-3,-2,-1,0,+1,+2,+3\}$
+	
+	$\overbracket{\bolinha{01} \bolinha{02} \bolinha{03}}^\text{Brancas} \overbracket{\bolinha{04} \bolinha{05} \bolinha{06} \bolinha{07} \bolinha{08}}^\text{Pretas} \overbracket{\bolinha{09} \bolinha{10} \bolinha{11}}^\text{Azuis}$
+	
+	\notagrande{A resolução foi suprimida. É preciso ``calcular os pês''.}
+	
+	$|\varOmega|=\begin{pmatrix}
+		11 \\
+		3
+	\end{pmatrix}$ então $\varOmega = \{(i,j,k)\}: 1 \leq i \leq j \leq k \leq 11$
+	
+	$E(X) = \sum_{i=-3}^{+3} i \cdot p(i) = \dfrac{6}{11}\mathcal{p}$
+
+	\subsection{Proposição 1}
+	
+	Seja $x$ uma v. a. discreta com f. m. p. ${p}_{x}(x)$ e $f:\mathbb{R} \rightarrow \mathbb{R}$ uma função real, $y:=f(x)$ será também v. a. aleatória discreta e $E(y) = E(f(x)) = \sum_{i \in I}f(x_{i}) \cdot p_{x}(x_{i})$ quando $f(x) = ax + b$, $E(ax+b) \doteq \sum_{i}(ax_{i}+b) \cdot p(x_{i}) = a\sum_{i} x_{i} p(x_{i}) + b\sum_{i} x_{i} p(x_{i}) = a \cdot E(x) + b = f(E(x))$.
+	
+	\subsection{Exemplo 14}
+	
+	$\overbrace{E(\underbrace{[\overbrace{x-E(x)}^\text{Desvio}]^2}_\text{Desvio quadrático})}^\text{Desvio quadrático médio} = \sum_{i} [x_{i} - E(x)]^{2} \cdot p(x_{i})$
+	
+	$= \sum_{i} [x_{i}^{2} + E^{2}(x) - 2x_{i} E(x)] p(x_{i})$
+	
+	$= \sum_{i} x_{i}^{2} p(x_{i}) + E^{2}(x) \cdot \sum_{i}p(x_{i}) - 2E(x) \sum_{i} x_{i}p(x_{i})$
+	
+	$= E(x^{2}) + E^{2}(x) - 2 E^{2}(x) = E(x^{2}) - E^{2}(x)\mathcal{p}$
+	
+	\subsection{Definição 6}
+	
+	A variância de uma v. a. $Var(x)$ corresponde ao seu \textbf{desvio quadrático médio} e $\sigma_{x}$, o seu desvio padrão, corresponde à raiz quadrada de $Var(x)$, ou seja:
+	
+	\begin{equation*}
+	\sigma_{x}^{2} = Var(x) = E ([x-E(x)]^{2}) = E(x^{2}) - E^{2}(x)
+	\end{equation*}
+	
+	\subsection{Exemplo 13}
+	
+	\notagrande{Exemplo 13 $\Rightarrow$ Exemplo 9}
+	
+	\subsection{Exemplo 15}
+	
+	\notagrande{Exemplo 15 $\Rightarrow$ Exemplo 9}
+	
+	$E(x^{2}) = \sum_{K=2}^{12} K^{2} \cdot p(K) = 54,83 > 49 = 7^{2} = E^{2}(x)$
+	
+	$Var(x) = E(x^{2}) = E(x^{2}) - E^{2}(x) = 54, 83 - 49 = 5,83 \rightarrow \sigma_{x} = 2,41$
 	
 	% ----------------------------------------------------------
 	
