@@ -1246,6 +1246,104 @@
 	
 	Se $E_{1}, E_{2}, \dots, E_{n}, \dots$ forem independentes e cada $F_{K}$ for uma fórmula booleana de distintos $E_{ns}$, $K=1,2,3, \dots$, então a sequência $F_{1}, F_{2}, \dots, F_{K}, \dots$ também será de eventos independentes. Logo, em particular \notaesq{Lê-se ``sequência complementada''}$E_{1}^{C}, E_{2}^{C}, E_{3}^{C}, \dots, E_{n}^{C}$são independentes.
 	
+	$ F_{1} = E_{1} \cap (E_{2} \cup E_{3}^{C}), F_{2} = E_{5} \cup E_{6}, F_{3} = E_{8}^{C} $\nota{Lê-se ``Ê oito complementar''}
+	
+	\subsubsection{Exemplo 12}
+	
+	\noindent Se $E_{1}, E_{2}, \dots, E_{n}, \dots$ forem independentes, então:
+	
+	\noindent (i) $E_{1}$ e $E_{2}^{C}$ são independentes;
+	
+	$ \mathcal{P}(E_{1} \cap E_{2}^{C}) = \mathcal{P}(E_{1}) \cdot \mathcal{P}(E_{2}^{C}) $
+	
+	$ \mathcal{P}(E_{1} | E_{2}^{C}) = \dfrac{\mathcal{P}(E_{1} \cap E_{2})}{\mathcal{P}(E_{2})} = \dfrac{\mathcal{P}(E_{1}) \cdot \cancel{\mathcal{P}(E_{2})}}{\cancel{\mathcal{P}(E_{2})}} $
+	
+	$ \mathcal{P}(E_{1}) = \mathcal{P}(E_{1} \cap E_{2}) + \mathcal{P}(E_{1} \cap E_{2}^{C}) = \mathcal{P}(E_{1}) \cdot \mathcal{P}(E_{2}) + \mathcal{P}(E_{1} \cap E_{2}^{C}) = \mathcal{P}(E_{1}) \cdot [1 - \mathcal{P}(E_{2})] = \mathcal{P}(E_{1}) \cdot \mathcal{P}(E_{2}^{C})\mathcal{p} $
+	
+	\noindent (ii) $E_{1}$ e $(E_{2} \cup E_{3})$ são independentes;
+	
+	$ \mathcal{P}(E_{1} \cap (E_{2} \cup E_{3})) = \mathcal{P}(\overbrace{(E_{1} \cap E_{2})}^\text{A} \cup \overbrace{(E_{1} \cap E_{3})}^\text{B}) = \mathcal{P}(E_{1} \cap E_{2}) + \mathcal{P}(E_{1} \cap E_{3}) - \mathcal{P}(E_{1} \cap E_{2} \cap E_{3}) $
+	
+	$ = \mathcal{P}(E_{1}) \cdot \mathcal{P}(E_{2}) + \mathcal{P}(E_{1}) \cdot \mathcal{P}(E_{3}) - \mathcal{P}(E_{1}) \cdot \mathcal{P}(E_{2}) \cdot \mathcal{P}(E_{3}) $
+	
+	$ = \mathcal{P}(E_{1}) \cdot [\mathcal{P}(E_{2}) + \mathcal{P}(E_{3}) - \mathcal{P}(E_{2}) \cdot \mathcal{P}(E_{3})] $
+	
+	$ = \mathcal{P}(E_{1'}) \cdot [\mathcal{P}(E_{2}) + \mathcal{P}(E_{3}) - \mathcal{P}(E_{2} \cap (E_{3})] $
+	
+	$ = \mathcal{P}(E_{1}) \cdot \mathcal{P}(E_{2} \cup E_{3})\mathcal{p} $
+	
+	\noindent (iii) $ E_{1}^{C}, E_{2}^{C}, E_{3}^{C} $
+	
+	$ \mathcal{P}(E_{1}^{C}) \cdot \mathcal{P}(E_{2}^{C}) \cdot \mathcal{P}(E_{3}^{C}) = [1 - \mathcal{P}(E_{1})] \cdot [1 - \mathcal{P}(E_{2})] \cdot [1 - \mathcal{P}(E_{3})] $
+	
+	(iv) Exercício 1: mostra que $(E_{1} \cap E_{2})$ e $(E_{3} \cap E_{4}^{C})$ são independentes.
+	
+	\subsubsection{Exemplo 15}
+	
+	\notagrande{Exemplos 13 e 14 suprimidos devido à escassez de tempo}
+	
+	\noindent Dois lados honestos são lançados sucessivamente até que a soma de suas faces seja $5$ ou $7$.
+	
+	\noindent Qual a probabilidade de que a soma $5$ ocorra antes da soma $7$?
+	
+	$5 = 4$ pares 
+	
+	$7 = 6$ pares 
+	
+	$7$ é mais provável 
+	
+	$A_{n}$: soma $5$ no n-ésimo lançamento $\rightarrow \mathcal{P}(A_{n}) = \frac{1}{9}$
+	
+	$B_{n}$: soma $7$ no n-ésimo lançamento $\rightarrow \mathcal{P}(B_{n}) = \frac{1}{6}$
+	
+	$C_{n}$: $A_{n}^{C} \cap B_{n}^{C}$: nem $5$, nem $7$ no n-ésimo lançamento $\rightarrow \mathcal{P}(C_{n}) = \frac{26}{36} = \frac{13}{18}$
+	
+	$E$: soma $5$ vence
+	
+	$E = A_{1} \cup (C_{1} \cap A_{2}) \cup (C_{1} \cap C_{2} \cap A_{3}) \cup \dots \cup(C_{1} \cap C_{2} \cap \dots C_{1-1} \cap A_{n}) \cup \dots \rightarrow$
+	
+	$\mathcal{P}(E) = \mathcal{P}(A_{1}) + \mathcal{P}(C_{1} \cap A_{2}) + \dots + \mathcal{P}(C_{1} \cap C_{2} \cap \dots \cap A_{n}) + \dots \rightarrow$
+	
+	$\mathcal{P}(E) = \frac{1}{9} + \frac{13}{18} \cdot \frac{1}{9} + (\frac{13}{18})^{2} \cdot \frac{1}{9} + \dots + (\frac{13}{18})^{n - 1} \cdot \frac{1}{9} + \dots$
+	
+	$= \dfrac{\frac{1}{9}}{1 - \frac{13}{18}} = \dfrac{\frac{1}{9}}{\frac{5}{18}} = \frac{2}{5} = 40\%$
+	
+	\subsubsection{Exemplo 16}
+	
+	\noindent Uma moeda (com PCC $= p \in [0,1]$) é lançada sucessivas vezes. Qual a probabilidade de sete caras ocorrerem antes de duas coroas?
+	
+	$E$: ``sete caras antes de duas coroas'' = ``pelo menos sete caras em oito lançamentos''
+	
+	$\mathcal{P}(E) = \begin{pmatrix}
+	8 \\
+	7
+	\end{pmatrix} p^{7} \cdot (1 - \mathcal{P})^{1} + \begin{pmatrix}
+	8 \\
+	8
+	\end{pmatrix} p^{8}$
+	
+	$\mathcal{P} = \frac{1}{2} = \frac{8 + 1}{2^{8}} = \frac{9}{256}$
+	
+	$|\varOmega| = 2^{8} = 256$
+	
+	$|E| = \begin{pmatrix}
+	8 \\
+	7
+	\end{pmatrix} + \begin{pmatrix}
+	8 \\
+	8
+	\end{pmatrix} = 8 + 1 = 9$
+	
+	$x \cdot \frac{9}{256} - 1 \cdot \frac{247}{256} = 0 \rightarrow x = \frac{247}{9}$
+	
+	\subsubsection{Exemplo 13}
+	
+	\noindent $E_{1}, E_{2}, \dots, E{n}, \dots$ independentes. Mostre que $\mathcal{P}(E_{1} \cup E_{2} \cup \dots \cup E_{n} = 1 - (1-\mathcal{P}(E_{1})) \cdot (1 - \mathcal{P}(E_{2})) \cdot \dots \cdot (1 - \mathcal{P}(E_{m}))$
+	
+	\notagrande{Forma compacta: $\mathcal{P}(\bigcup_{i=1}^{n} E_{i}) = \prod_{i=1}^{n} 1 - \mathcal{P}(E_{i})$}
+	
+	\noindent Prova: $\mathcal{P}(\bigcup_{i=1}^{n} E_{i}) = \mathcal{P}([\bigcup_{i=1}^{n} E_{i}^{C}]^{C}) = 1 - \mathcal{P}(\bigcap_{i=1}^{n} E_{1}^{C}) = 1 - \prod_{i=1}^{n} \mathcal{P}(E_{i}^{C}) = 1 - \prod_{i=1}^{n} [1-\mathcal{P}(E_{i})]\mathcal{p}$
+	
 	\aula{Início da aula de 28/11/2018}
 	
 	\section{Variáveis aleatórias}
